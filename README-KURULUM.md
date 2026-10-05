@@ -1,12 +1,12 @@
 # Bilfen Algoritma Atlası — Kuruluma Hazır Dağıtım Paketi
 
-Bu paket, Bilfen Eğitim Kurumları için geliştirilen **Bilfen Algoritma Atlası** platformunun başka bir Linux sunucuya kurulabilir kaynak kodunu, Drizzle/MySQL migration zincirini, yerel görsellerini ve Docker Compose kurulumunu içerir.
+Bu paket, Bilfen Eğitim Kurumları için geliştirilen **Bilfen Algoritma Atlası** platformunun başka bir Linux sunucuya kurulabilir kaynak kodunu, Drizzle/PostgreSQL migration zincirini, yerel görsellerini ve Docker Compose kurulumunu içerir.
 
 ## İçerik
 
 - React 19 + Vite istemci uygulaması
 - Express + tRPC sunucusu
-- Drizzle ORM ile MySQL şeması
+- Drizzle ORM ile PostgreSQL şeması (Supabase uyumlu)
 - Öğrenci, öğretmen ve yönetici yerel hesapları
 - 19 Bilfen kampüsü, 5/6/7 sınıf ve Explorer/Innovator/Designer grupları
 - 35 adımlı Bilfen Algoritma Atlası
@@ -35,9 +35,9 @@ docker compose up -d --build
 
 Uygulama: `http://SUNUCU_IP:3000`
 
-İlk başlatmada container, MySQL hazır olduktan sonra `drizzle-kit migrate` çalıştırır ve bütün migrationları sırayla uygular.
+İlk başlatmada container, PostgreSQL hazır olduktan sonra `drizzle-kit migrate` çalıştırır ve bütün migrationları sırayla uygular.
 
-> Üretimde Compose dosyasındaki örnek MySQL ve JWT parolalarını mutlaka değiştirin. Dış dünyaya yalnızca reverse proxy (Nginx/Caddy/Traefik) üzerinden HTTPS açmanız önerilir.
+> Üretimde Compose dosyasındaki örnek PostgreSQL ve JWT parolalarını mutlaka değiştirin. Dış dünyaya yalnızca reverse proxy (Nginx/Caddy/Traefik) üzerinden HTTPS açmanız önerilir.
 
 ## İlk yönetici hesabı
 
@@ -57,17 +57,19 @@ Gereksinimler:
 
 - Node.js 22+
 - pnpm 10+
-- MySQL 8+
+- PostgreSQL 16+ (veya ücretsiz Supabase hesabı)
 
 ```bash
 pnpm install --frozen-lockfile
 cp docs/env.template .env
 ```
 
-`.env` içindeki `DATABASE_URL` değerini yerel MySQL sunucunuza göre ayarlayın:
+`.env` içindeki `DATABASE_URL` değerini yerel PostgreSQL sunucunuza veya Supabase bağlantınızı göre ayarlayın:
 
 ```text
-DATABASE_URL=mysql://bilfen:parola@127.0.0.1:3306/bilfen_atlas
+DATABASE_URL=postgres://bilfen:parola@127.0.0.1:5432/bilfen_atlas
+# veya Supabase:
+DATABASE_URL=postgresql://postgres:SIFRE@db.PROJE_REF.supabase.co:5432/postgres
 ```
 
 Şemayı uygulayın, üretim paketini oluşturun ve başlatın:
@@ -138,13 +140,13 @@ Bu arşiv **uygulama kaynak kodunu ve veritabanı şemasını** içerir; canlı 
 Canlı sistemde veritabanı erişiminiz varsa:
 
 ```bash
-mysqldump --single-transaction --routines --triggers VERITABANI_ADI > bilfen-atlas-live.sql
+pg_dump --no-owner --no-privileges VERITABANI_ADI > bilfen-atlas-live.sql
 ```
 
-Hedef MySQL veritabanına migrationlar uygulandıktan sonra yedeği yükleyin:
+Hedef PostgreSQL veritabanına migrationlar uygulandıktan sonra yedeği yükleyin:
 
 ```bash
-mysql -u bilfen -p bilfen_atlas < bilfen-atlas-live.sql
+psql "DATABASE_URL" -f bilfen-atlas-live.sql
 ```
 
 Kullanıcı parolaları düz metin olarak saklanmadığından, canlı `localAccounts.passwordHash` alanları dump içinde korunur; buna rağmen dump dosyasını şifreli ve erişimi sınırlı saklayın.

@@ -11,7 +11,7 @@ kampüs karşılaştırma raporları.
 ## Öne çıkanlar
 
 - **React 19 + Vite** istemcisi, **Express + tRPC** sunucusu
-- **Drizzle ORM** ile **MySQL 8** şeması (11 migration dosyası)
+- **Drizzle ORM** ile **PostgreSQL** şeması (Supabase ücretsiz planı ile uyumlu)
 - Yerel hesap sistemi (scrypt ile şifre saklama, OAuth zorunlu değil)
 - 19 Bilfen kampüsü, 5/6/7. sınıf ve Explorer/Innovator/Designer grupları
 - Öğretmen paneli: CSV ile toplu öğrenci aktarımı, grup düzenleme, analizler
@@ -45,16 +45,21 @@ parolayı mutlaka değiştirin. Öğretmenler ve öğrenciler panelden oluşturu
 
 ## Docker olmadan kurulum
 
-Gereksinim: Node.js 22+, pnpm 10+, MySQL 8+
+Gereksinim: Node.js 22+, pnpm 10+, PostgreSQL 16+ (veya ücretsiz Supabase hesabı)
 
 ```bash
 pnpm install --frozen-lockfile
 cp docs/env.template .env
-# DATABASE_URL=mysql://bilfen:parola@127.0.0.1:3306/bilfen_atlas
+# DATABASE_URL=postgres://bilfen:parola@127.0.0.1:5432/bilfen_atlas
+# veya Supabase: DATABASE_URL=postgresql://postgres:SIFRE@db.PROJE_REF.supabase.co:5432/postgres
 pnpm drizzle-kit migrate
 pnpm build
 pnpm start
 ```
+
+> **Supabase kullanıyorsanız** şemayı sürücüye gerek kalmadan kurabilirsiniz:
+> `docs/supabase-schema.sql` dosyasının içeriğini Supabase panelindeki
+> **SQL Editor**'e yapıştırıp çalıştırın (ücretsiz plan için önerilir).
 
 ## Geliştirme komutları
 
@@ -85,7 +90,7 @@ patches/         pnpm yamaları (wouter)
 ## Güvenlik notları
 
 - `.env` dosyası asla depoya girmez (`docs/env.template` örnek şablondur)
-- Compose dosyasındaki MySQL parolaları örnek değerlerdir; üretimde değiştirin
+- Compose dosyasındaki PostgreSQL parolaları örnek değerlerdir; üretimde değiştirin
 - Dış dünyaya yalnız reverse proxy (Nginx/Caddy/Traefik) üzerinden HTTPS açın
 - `research-source/` (TÜBİTAK bilişim olimpiyatı soru kitapçıkları) telif
   gereği depoya dahil değildir

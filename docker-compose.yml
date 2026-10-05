@@ -1,16 +1,15 @@
 services:
   db:
-    image: mysql:8.4
+    image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: bilfen_atlas
-      MYSQL_USER: bilfen
-      MYSQL_PASSWORD: bilfen_local_change_me
-      MYSQL_ROOT_PASSWORD: bilfen_root_change_me
+      POSTGRES_DB: bilfen_atlas
+      POSTGRES_USER: bilfen
+      POSTGRES_PASSWORD: bilfen_local_change_me
     volumes:
-      - bilfen_mysql_data:/var/lib/mysql
+      - bilfen_pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD --silent"]
+      test: ["CMD-SHELL", "pg_isready -U bilfen -d bilfen_atlas"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -24,7 +23,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      DATABASE_URL: mysql://bilfen:bilfen_local_change_me@db:3306/bilfen_atlas
+      DATABASE_URL: postgres://bilfen:bilfen_local_change_me@db:5432/bilfen_atlas
       JWT_SECRET: change-this-to-a-long-random-secret
       VITE_APP_ID: ${VITE_APP_ID:-}
       OAUTH_SERVER_URL: ${OAUTH_SERVER_URL:-}
@@ -39,4 +38,4 @@ services:
       - "3000:3000"
 
 volumes:
-  bilfen_mysql_data:
+  bilfen_pg_data:
