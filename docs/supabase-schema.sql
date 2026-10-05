@@ -120,3 +120,29 @@ CREATE TABLE "users" (
 CREATE UNIQUE INDEX "dailyTasks_userId_taskDate_unique" ON "dailyTasks" USING btree ("userId","taskDate");--> statement-breakpoint
 CREATE UNIQUE INDEX "learnerBadges_userId_badgeKey_unique" ON "learnerBadges" USING btree ("userId","badgeKey");--> statement-breakpoint
 CREATE UNIQUE INDEX "scienceHintUses_userId_questionId_unique" ON "scienceHintUses" USING btree ("userId","questionId");
+-- ============================================================
+-- GÜVENLİK (RLS): Yeni tablolar yalnızca uygulama sunucusuna
+-- (postgres rolü) açıktır; anon/authenticated rolleri okuyamaz.
+-- Böylece eski sitenin herkese açık API anahtarı bu verilere
+-- erişemez. Öğrenci verileri korunur.
+-- ============================================================
+ALTER TABLE "public"."users" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."users" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."localAccounts" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."localAccounts" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."dailyTasks" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."dailyTasks" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."teacherAssignments" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."teacherAssignments" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."studentPractice" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."studentPractice" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."learnerProfiles" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."learnerProfiles" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."learnerBadges" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."learnerBadges" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."learningResults" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."learningResults" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."scienceResults" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."scienceResults" FOR ALL TO postgres USING (true) WITH CHECK (true);
+ALTER TABLE "public"."scienceHintUses" ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "atlas_server_full_access" ON "public"."scienceHintUses" FOR ALL TO postgres USING (true) WITH CHECK (true);
