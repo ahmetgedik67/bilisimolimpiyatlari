@@ -1,0 +1,1 @@
+ALTER TABLE `learnerProfiles` ADD `avatarKey` varchar(32) DEFAULT 'robot-blue' NOT NULL;

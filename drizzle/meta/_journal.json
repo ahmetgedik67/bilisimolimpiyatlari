@@ -1,0 +1,83 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1787392878158,
+      "tag": "0000_cultured_praxagora",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1787393205980,
+      "tag": "0001_pretty_revanche",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1787393435769,
+      "tag": "0002_careless_thunderbolt_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1787434884888,
+      "tag": "0003_short_black_crow",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1787441866939,
+      "tag": "0004_nifty_unicorn",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1787442532291,
+      "tag": "0005_heavy_madrox",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1787442945194,
+      "tag": "0006_medical_kingpin",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1787444329049,
+      "tag": "0007_eager_hitman",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1787490784535,
+      "tag": "0008_wealthy_micromacro",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1787492382511,
+      "tag": "0009_opposite_cerebro",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1787634064111,
+      "tag": "0010_skinny_black_tarantula",
+      "breakpoints": true
+    }
+  ]
+}
