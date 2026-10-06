@@ -412,9 +412,9 @@ export default function Home() {
           <a className="topbar-link topbar-link--science" href="/bilim-zeka">Bilim ve Zekâ</a>
           <a className="topbar-link" href="#kaynaklar">Araştırma notu</a>
           {isAuthenticated ? (
-            <a className="learner-chip" href="/giris"><ShieldCheck size={15} /> {user?.name ?? "Hesabım"}</a>
+            <a className="topbar-link" href="/giris"><ShieldCheck size={14} /> {user?.name ?? "Hesabım"}</a>
           ) : (
-            <a className="login-button" href="/giris">Giriş <ArrowUpRight size={15} /></a>
+            <a className="topbar-link" href="/giris" title="Öğretmen ve yönetici girişi"><LockKeyhole size={13} /> Yönetici</a>
           )}
         </div>
       </header>
