@@ -91,7 +91,8 @@ export const appRouter = router({
       .input(z.object({ username: usernameInput, password: passwordInput }))
       .mutation(async ({ ctx, input }) => {
         const account = await getLocalAccountByUsername(input.username);
-        if (!account || !account.isActive || !(await verifyPassword(input.password, account.passwordHash))) {
+        // Öğrenci girişi kalıcı olarak kapalıdır; platform yalnız eğitim içeriği olarak paylaşılır.
+        if (!account || account.accountRole === "student" || !account.isActive || !(await verifyPassword(input.password, account.passwordHash))) {
           throw new TRPCError({ code: "UNAUTHORIZED", message: "Kullanıcı adı veya parola hatalı." });
         }
         const user = await getUserById(account.userId);

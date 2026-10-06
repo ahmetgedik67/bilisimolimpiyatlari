@@ -7,8 +7,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Lessons from "./pages/Lessons";
 import Login from "./pages/Login";
-import TeacherDashboard from "./pages/TeacherDashboard";
-import CampusReport from "./pages/CampusReport";
 import ScienceReasoning from "./pages/ScienceReasoning";
 
 function Router() {
@@ -18,8 +16,6 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/konu-anlatimi"} component={Lessons} />
       <Route path={"/giris"} component={Login} />
-      <Route path={"/ogretmen"} component={TeacherDashboard} />
-      <Route path={"/kampus-raporu"} component={CampusReport} />
       <Route path={"/bilim-zeka"} component={ScienceReasoning} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

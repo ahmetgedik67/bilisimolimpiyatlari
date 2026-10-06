@@ -1,12 +1,9 @@
-import { startLogin } from "@/const";
 import { createAnswerUnlockAt, getAnswerSecondsLeft, isAnswerLocked as isAnswerLockActive } from "@/lib/answerLock";
 import { ROBI_IMAGE, robiMessages } from "@/lib/robiGuide";
 import { RobiImage } from "@/components/RobiImage";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Trace100Panel } from "@/components/Trace100Panel";
-import { StudentGrowthDashboard } from "@/components/StudentGrowthDashboard";
-import { LeaderboardTop20 } from "@/components/LeaderboardTop20";
 import {
   ArrowUpRight,
   BookOpen,
@@ -226,7 +223,7 @@ function MissionSeal({ completed }: { completed: boolean }) {
 }
 
 export default function Home() {
-  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [progress, setProgress] = useState<ProgressState>({ ageBand: "5-6", completedMissionIds: [], merakPuani: 0 });
   const [activeMissionId, setActiveMissionId] = useState<MissionId>("iz-surme");
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -244,10 +241,7 @@ export default function Home() {
   const hasHydrated = useRef(false);
   const answerLockedRef = useRef(true);
 
-  const accountStatus = trpc.account.status.useQuery(undefined, { enabled: isAuthenticated });
-  const isStudentAccount = accountStatus.data?.role === "student";
-  const profileQuery = trpc.learning.profile.useQuery(undefined, { enabled: isStudentAccount });
-  const assignmentsQuery = trpc.learning.assignments.useQuery(undefined, { enabled: isStudentAccount });
+  const profileQuery = trpc.learning.profile.useQuery(undefined, { enabled: isAuthenticated });
   const saveMission = trpc.learning.completeMission.useMutation({ onSuccess: () => profileQuery.refetch() });
   const saveAgeBand = trpc.learning.setAgeBand.useMutation();
   const saveTrial = trpc.learning.submitTrial.useMutation({ onSuccess: () => profileQuery.refetch() });
@@ -466,19 +460,6 @@ export default function Home() {
             {isAuthenticated ? <span className="save-state">hesabına kaydediliyor</span> : <span className="save-state">bu tarayıcıda saklanıyor</span>}
           </div>
         </section>
-
-        {isStudentAccount ? <StudentGrowthDashboard
-          ageBand={progress.ageBand}
-          completedMissionIds={progress.completedMissionIds}
-          merakPuani={progress.merakPuani}
-          activeMissionTitle={activeMission.title}
-          isAuthenticated={isStudentAccount}
-          accountRole={accountStatus.data?.role ?? null}
-          assignedMission={assignmentsQuery.data?.[0] ? { missionId: assignmentsQuery.data[0].missionId, note: assignmentsQuery.data[0].note } : null}
-          accountKey={user?.openId ?? "guest"}
-        /> : <section className="growth-panel growth-panel--staff" aria-label="Personel çalışma alanı"><RobiImage src={ROBI_IMAGE} alt="Robi, öğretmen ve yönetici rehberi" /><div><span className="growth-section-heading">Robi’nin sınıf rehberi</span><h2>Öğrenci ritmini panelden izle.</h2><p>Öğrenciye özel günlük görev ve çalışma bütçesi yalnız öğrenci hesabında görünür. Sınıf ilerlemesi, görev ataması ve parola yönetimi için öğretmen merkezine geç.</p><a className="growth-link" href="/ogretmen">Öğretmen merkezini aç <ArrowUpRight size={15} /></a></div></section>}
-
-        <LeaderboardTop20 />
 
         <section className="setup-section" aria-labelledby="seviye-baslik">
           <div>

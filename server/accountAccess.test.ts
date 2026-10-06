@@ -39,15 +39,23 @@ function context(user: any) {
 describe("öğretmen ve öğrenci hesap erişimi", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it("doğru kullanıcı adı/parola ile imzalı yerel oturum oluşturur", async () => {
+  it("öğretmenin doğru kullanıcı adı/parolasıyla imzalı yerel oturum oluşturur", async () => {
+    localTeacher.passwordHash = await hashPassword("Atlas!2026");
+    dbMock.getLocalAccountByUsername.mockResolvedValue(localTeacher);
+    dbMock.getUserById.mockResolvedValue({ id: 22, openId: "local:ogretmen.1", name: "Ayşe Öğretmen" });
+    const { ctx, cookies } = context(null);
+    const result = await appRouter.createCaller(ctx).account.login({ username: "OGRETMEN.1", password: "Atlas!2026" });
+    expect(result.account.role).toBe("teacher");
+    expect(dbMock.getLocalAccountByUsername).toHaveBeenCalledWith("ogretmen.1");
+    expect(cookies[0]).toMatchObject({ name: COOKIE_NAME, value: "signed-local-session" });
+  });
+
+  it("öğrenci hesabının girişini kalıcı olarak engeller", async () => {
     localStudent.passwordHash = await hashPassword("Atlas!2026");
     dbMock.getLocalAccountByUsername.mockResolvedValue(localStudent);
-    dbMock.getUserById.mockResolvedValue({ id: 7, openId: "local:ogrenci.1", name: "Deniz Öğrenci" });
-    const { ctx, cookies } = context(null);
-    const result = await appRouter.createCaller(ctx).account.login({ username: "OGRENCI.1", password: "Atlas!2026" });
-    expect(result.account.role).toBe("student");
-    expect(dbMock.getLocalAccountByUsername).toHaveBeenCalledWith("ogrenci.1");
-    expect(cookies[0]).toMatchObject({ name: COOKIE_NAME, value: "signed-local-session" });
+    const { ctx } = context(null);
+    await expect(appRouter.createCaller(ctx).account.login({ username: "OGRENCI.1", password: "Atlas!2026" })).rejects.toMatchObject({ code: "UNAUTHORIZED" });
+    expect(dbMock.getUserById).not.toHaveBeenCalled();
   });
 
   it("öğrenci hesabının öğretmen ilerleme listesini okumasını engeller", async () => {

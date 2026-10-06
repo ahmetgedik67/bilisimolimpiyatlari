@@ -5,8 +5,6 @@ import { maskStudentDisplayName } from "./db";
 
 const dbSource = readFileSync(new URL("./db.ts", import.meta.url), "utf8");
 const routerSource = readFileSync(new URL("./routers.ts", import.meta.url), "utf8");
-const loginSource = readFileSync(new URL("../client/src/pages/Login.tsx", import.meta.url), "utf8");
-const homeSource = readFileSync(new URL("../client/src/components/LeaderboardTop20.tsx", import.meta.url), "utf8");
 
 describe("İlk 20 ve profil avatarı sözleşmesi", () => {
   it("tam olarak 20 özgün avatar tanımlar ve bilinmeyen anahtarda güvenli varsayılan kullanır", () => {
@@ -30,19 +28,10 @@ describe("İlk 20 ve profil avatarı sözleşmesi", () => {
     expect(dbSource).toContain(".limit(20)");
   });
 
-  it("public leaderboard ve öğrenci avatar mutation’ı sözleşmede bulunur", () => {
+  it("public leaderboard ve öğrenci avatar mutation'ı sözleşmede bulunur", () => {
     expect(routerSource).toContain("leaderboard: router");
     expect(routerSource).toContain("top20: publicProcedure");
     expect(routerSource).toContain("setAvatar: protectedProcedure");
     expect(routerSource).toContain("Avatar seçimi yalnız öğrenci hesaplarına açıktır.");
-  });
-
-  it("profil ekranı 20 seçeneği ve ana sayfa İlk 20 kartını erişilebilir adlarla sunar", () => {
-    expect(loginSource).toContain("AVATAR_OPTIONS.map");
-    expect(loginSource).toContain("aria-pressed");
-    expect(loginSource).toContain("setAvatar.mutate");
-    expect(homeSource).toContain('aria-labelledby="ilk-20-baslik"');
-    expect(homeSource).toContain("aria-label={`");
-    expect(homeSource).toContain("Sıralama şu anda yüklenemedi");
   });
 });
