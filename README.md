@@ -98,3 +98,10 @@ patches/         pnpm yamaları (wouter)
 ## Lisans
 
 MIT — ayrıntılar için `package.json`.
+
+## Dağıtım (Render)
+
+- Kaynak: GitHub App üzerinden `ahmetgedik67/bilisimolimpiyatlari` (branch: `main`)
+- Auto-Deploy: **On Commit** — `main`e her push otomatik deploy başlatır
+- Build: `corepack enable && pnpm install --frozen-lockfile && pnpm run build` · Start: `pnpm run start`
+- Ortam değişkenleri: `DATABASE_URL`, `JWT_SECRET`, `NODE_VERSION=22`
