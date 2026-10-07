@@ -410,6 +410,7 @@ export default function Home() {
           <a className="topbar-link" href="#rota">Atlas rotası</a>
           <a className="topbar-link topbar-link--course" href="/konu-anlatimi">Dersler</a>
           <a className="topbar-link topbar-link--science" href="/bilim-zeka">Bilim ve Zekâ</a>
+          <a className="topbar-link topbar-link--isbo" href="/isbo-atolyesi">İSBO Atölyesi</a>
           <a className="topbar-link" href="#kaynaklar">Araştırma notu</a>
           {isAuthenticated ? (
             <a className="topbar-link" href="/giris"><ShieldCheck size={14} /> {user?.name ?? "Hesabım"}</a>

@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Lessons from "./pages/Lessons";
 import Login from "./pages/Login";
 import ScienceReasoning from "./pages/ScienceReasoning";
+import IsboWorkshop from "./pages/IsboWorkshop";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -17,6 +18,7 @@ function Router() {
       <Route path={"/konu-anlatimi"} component={Lessons} />
       <Route path={"/giris"} component={Login} />
       <Route path={"/bilim-zeka"} component={ScienceReasoning} />
+      <Route path={"/isbo-atolyesi"} component={IsboWorkshop} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
