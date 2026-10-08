@@ -33,7 +33,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "1",
     topic: "Kümeler",
     skill: "Ortak harf sayma",
-    image: "/assets/isbo/q01.png",
+    image: "assets/isbo/q01.png",
     section: "Sayı ve harf mantığı",
     prompt:
       "Aslı BİLGİSAYAR kelimesinden, Burhan OLİMPİYAT kelimesinden 5 farklı harf seçiyor. Aslı'nın seçtiği harflerin en fazla kaçı Burhan'da da olabilir?",
@@ -75,7 +75,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "2",
     topic: "Yaş problemi",
     skill: "Zaman kaydırma",
-    image: "/assets/isbo/q02.png",
+    image: "assets/isbo/q02.png",
     section: "Sayı ve harf mantığı",
     prompt:
       "İbrahim, Ahmet'ten 12 yaş büyüktür. 5 yıl önce Ahmet 4 yaşına olduğuna göre 3 yıl sonra İbrahim kaç yaşında olacaktır?",
@@ -118,7 +118,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "3",
     topic: "Sayma",
     skill: "İşlem sayma",
-    image: "/assets/isbo/q03.png",
+    image: "assets/isbo/q03.png",
     section: "Sayı ve harf mantığı",
     prompt:
       "Marangoz bir kalayı önce üç parçaya, sonra her parçayı üçer parçaya ayırıyor. Kesme işlemini kaç kez yapmıştır?",
@@ -159,7 +159,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "4",
     topic: "Örüntü",
     skill: "Dönem (periyot) bulma",
-    image: "/assets/isbo/q04.png",
+    image: "assets/isbo/q04.png",
     section: "Sayı ve harf mantığı",
     prompt:
       "1, 2, 3, 4, 5, 4, 3, 2, 1, 2, 3, 4, 5, … örüntüsünde 2024. sayı kaçtır?",
@@ -198,7 +198,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "5",
     topic: "Büyük sayılar",
     skill: "Terimleri gruplama",
-    image: "/assets/isbo/q05.png",
+    image: "assets/isbo/q05.png",
     section: "Sayı ve harf mantığı",
     prompt:
       "1 − 12 + 123 − 1234 + 12345 − 123456 + 1234567 − 12345678 + 123456789 işleminin sonucu hangi sayıdır?",
@@ -244,7 +244,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "6",
     topic: "Takas hamleleri",
     skill: "En az hamle planı",
-    image: "/assets/isbo/q06.png",
+    image: "assets/isbo/q06.png",
     section: "Takas hamleleri",
     sectionNote:
       "Tahtaya sıralı olarak 1, 5, 3, 2, 7, 6 sayıları yazılmıştır. Ahmet her hamlede iki sayı seçip yerlerini değiştiriyor (meselâ 3 ve 7'yi seçerse 3'ün yerine 7, 7'nin yerine 3 yazar). Amacı, istenen sırayı en az hamlede elde etmektir.",
@@ -284,7 +284,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "7",
     topic: "Takas hamleleri",
     skill: "Bitişik takas (ters sıra sayma)",
-    image: "/assets/isbo/q07.png",
+    image: "assets/isbo/q07.png",
     section: "Takas hamleleri",
     sectionNote:
       "Tahtaya sıralı olarak 1, 5, 3, 2, 7, 6 sayıları yazılmıştır. Ahmet her hamlede iki sayı seçip yerlerini değiştiriyor. Amacı, istenen sırayı en az hamlede elde etmektir.",
@@ -326,7 +326,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "8",
     topic: "Takas hamleleri",
     skill: "Zincir çözümleme (n−1 hamle)",
-    image: "/assets/isbo/q08.png",
+    image: "assets/isbo/q08.png",
     section: "Takas hamleleri",
     sectionNote:
       "Tahtaya sıralı olarak 1, 5, 3, 2, 7, 6 sayıları yazılmıştır. Ahmet her hamlede iki sayı seçip yerlerini değiştiriyor. Amacı, istenen sırayı en az hamlede elde etmektir.",
@@ -369,7 +369,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "9",
     topic: "Eşitsizlik",
     skill: "Eşitsizliği tam sayılarda çözme",
-    image: "/assets/isbo/q09.png",
+    image: "assets/isbo/q09.png",
     section: "Sayı kuralları",
     prompt:
       "3 katının 5 fazlası, 5 katının 3 fazlasından büyük olan en büyük tam sayı kaçtır?",
@@ -413,7 +413,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "10",
     topic: "Sayma",
     skill: "Sıralı dizilişte konum hesabı",
-    image: "/assets/isbo/q10.png",
+    image: "assets/isbo/q10.png",
     section: "Sayı kuralları",
     prompt:
       "Bir grup öğrenci art arda sıralanmıştır. Önünde 5 kişi olanın arkasındaki öğrenci sayısı, arkasında 7 kişi olanın önündeki öğrenci sayısından kaç fazladır?",
@@ -455,7 +455,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "11",
     topic: "Çarpımlar",
     skill: "Basamaklı (teleskop) sadeleşme",
-    image: "/assets/isbo/q11.png",
+    image: "assets/isbo/q11.png",
     section: "Sayı kuralları",
     prompt:
       "(1 + 1/2)(1 + 1/3)(1 + 1/4) ⋯ (1 + 1/2023)(1 + 1/2024) çarpımı sadeleşmeyen m/n kesri ise m + n sayısının rakamları toplamı kaçtır?",
@@ -501,7 +501,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "12",
     topic: "Bölme ve kalan",
     skill: "Kalanlı sayı kümeleri",
-    image: "/assets/isbo/q12.png",
+    image: "assets/isbo/q12.png",
     section: "Sayı kuralları",
     prompt:
       "7 ile bölündüğünde 6 kalanını veren en küçük 5 doğal sayının toplamı, 4 ile bölündüğünde 3 kalanını veren en küçük 2 doğal sayının toplamının kaç katıdır?",
@@ -539,7 +539,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "13",
     topic: "Taban sistemleri",
     skill: "n=2 toplama",
-    image: "/assets/isbo/q13.png",
+    image: "assets/isbo/q13.png",
     section: "Taban sistemleri",
     sectionNote:
       "İsmail sayıları göstermek için on tane 0–9 sembolü yerine n tane sembol (0, 1, …, n−1) kullanmak istiyor; işlemler de bu sistemde yapılıyor. Örneğin n = 5 için 3 + 4 = 12 ve 13 · 3 = 44 olacaktır. Sıralama: 0, 1, 2, 3, 4, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30, …",
@@ -580,7 +580,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "14",
     topic: "Taban sistemleri",
     skill: "n=7 işlem zinciri",
-    image: "/assets/isbo/q14.png",
+    image: "assets/isbo/q14.png",
     section: "Taban sistemleri",
     sectionNote:
       "İsmail sayıları göstermek için n tane sembol kullanıyor; işlemler de bu sistemde yapılıyor. Örneğin n = 5 için 3 + 4 = 12 ve 13 · 3 = 44.",
@@ -625,7 +625,7 @@ const ISBO_EXAM_PART1: IsboQuestion[] = [
     number: "15",
     topic: "Taban sistemleri",
     skill: "Kimlik denklemi ve rakam koşulu",
-    image: "/assets/isbo/q15.png",
+    image: "assets/isbo/q15.png",
     section: "Taban sistemleri",
     sectionNote:
       "İsmail sayıları göstermek için n tane sembol kullanıyor; işlemler de bu sistemde yapılıyor. Örneğin n = 5 için 3 + 4 = 12 ve 13 · 3 = 44.",
@@ -680,7 +680,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "19",
     topic: "Graf",
     skill: "En kısa yol",
-    image: "/assets/isbo/q19.png",
+    image: "assets/isbo/q19.png",
     section: "Graf: şehir yolları",
     sectionNote:
       "Diyagram bir graf: A, B, C, D, E şehirleri; kenarlardaki sayılar kilometre. Bazı şehirler arasında doğrudan yol yok; A'dan E'ye başka şehirlerden uğrayarak gidilir. Kenarlar: C–A 3, A–B 6, C–B 2, C–D 3, C–E 4, D–E 2, D–B 5.",
@@ -736,7 +736,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "20",
     topic: "Graf",
     skill: "En uzun basit yol",
-    image: "/assets/isbo/q20.png",
+    image: "assets/isbo/q20.png",
     section: "Graf: şehir yolları",
     sectionNote:
       "Diyagram bir graf: A, B, C, D, E şehirleri; kenarlar: C–A 3, A–B 6, C–B 2, C–D 3, C–E 4, D–E 2, D–B 5.",
@@ -794,7 +794,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "16",
     topic: "Mantık bulmacası",
     skill: "Yaş karşılaştırması",
-    image: "/assets/isbo/q16.png",
+    image: "assets/isbo/q16.png",
     section: BILGELER_SECTION,
     sectionNote: BILGELER_NOTE,
     prompt: "Yaşça en büyük olan kimdir?",
@@ -838,7 +838,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "17",
     topic: "Mantık bulmacası",
     skill: "Çelişkiyle eleme",
-    image: "/assets/isbo/q17.png",
+    image: "assets/isbo/q17.png",
     section: BILGELER_SECTION,
     sectionNote: BILGELER_NOTE,
     prompt: "Astronom kimdir?",
@@ -882,7 +882,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "18",
     topic: "Mantık bulmacası",
     skill: "Rol eşleştirme",
-    image: "/assets/isbo/q18.png",
+    image: "assets/isbo/q18.png",
     section: BILGELER_SECTION,
     sectionNote: BILGELER_NOTE,
     prompt: "Süleyman'ın mesleği nedir?",
@@ -923,7 +923,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "21",
     topic: "Döngüler",
     skill: "while: yaz–sonra-arttır sırası",
-    image: "/assets/isbo/q21.png",
+    image: "assets/isbo/q21.png",
     section: "C Programlama",
     sectionNote:
       "[21-30] Sorular için açıklama: Soruları C programlama dili çerçevesinde cevaplayınız; derleyici olarak gcc kullanıldığı varsayılmıştır. Gerekli tüm başlık (header) dosyalarının programa dahil edildiğini varsayınız.",
@@ -965,7 +965,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "22",
     topic: "Kapsam (scope)",
     skill: "Blok içi tanım ve gölgeleme",
-    image: "/assets/isbo/q22.png",
+    image: "assets/isbo/q22.png",
     section: "C Programlama",
     sectionNote:
       "[21-30] Sorular için açıklama: Soruları C programlama dili çerçevesinde cevaplayınız; derleyici olarak gcc kullanıldığı varsayılmıştır. Gerekli tüm başlık (header) dosyalarının programa dahil edildiğini varsayınız.",
@@ -1013,7 +1013,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "23",
     topic: "Döngüler",
     skill: "Birikimli çarpım (faktöriyel)",
-    image: "/assets/isbo/q23.png",
+    image: "assets/isbo/q23.png",
     section: "C Programlama",
     sectionNote:
       "[21-30] Sorular için açıklama: Soruları C programlama dili çerçevesinde cevaplayınız; derleyici olarak gcc kullanıldığı varsayılmıştır. Gerekli tüm başlık (header) dosyalarının programa dahil edildiğini varsayınız.",
@@ -1058,7 +1058,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "24",
     topic: "Diziler",
     skill: "Koşullu toplama (çift filtresi)",
-    image: "/assets/isbo/q24.png",
+    image: "assets/isbo/q24.png",
     section: "C Programlama",
     sectionNote:
       "[21-30] Sorular için açıklama: Soruları C programlama dili çerçevesinde cevaplayınız; derleyici olarak gcc kullanıldığı varsayılmıştır. Gerekli tüm başlık (header) dosyalarının programa dahil edildiğini varsayınız.",
@@ -1103,7 +1103,7 @@ export const ISBO_EXAM_QUESTIONS_2: IsboQuestion[] = [
     number: "25",
     topic: "Karakter dizileri",
     skill: "İşaretle ve geç (tekrarsız yazdırma)",
-    image: "/assets/isbo/q25.png",
+    image: "assets/isbo/q25.png",
     section: "C Programlama",
     sectionNote:
       "[21-30] Sorular için açıklama: Soruları C programlama dili çerçevesinde cevaplayınız; derleyici olarak gcc kullanıldığı varsayılmıştır. Gerekli tüm başlık (header) dosyalarının programa dahil edildiğini varsayınız.",

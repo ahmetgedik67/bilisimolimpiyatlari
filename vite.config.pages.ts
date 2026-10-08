@@ -1,0 +1,32 @@
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import path from "node:path";
+import { defineConfig } from "vite";
+
+/**
+ * GitHub Pages (bilfen.github.io/bilisimolimpiyatlari) statik derleme yapılandırması.
+ * Yalnızca İSBO Soru Atölyesi'ni, sunucu bağımlılığı olmadan derler.
+ */
+const PROJECT_ROOT = import.meta.dirname;
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(PROJECT_ROOT, "client", "src"),
+      "@shared": path.resolve(PROJECT_ROOT, "shared"),
+      "@assets": path.resolve(PROJECT_ROOT, "attached_assets"),
+    },
+  },
+  envDir: path.resolve(PROJECT_ROOT),
+  root: path.resolve(PROJECT_ROOT, "client"),
+  publicDir: path.resolve(PROJECT_ROOT, "client", "public"),
+  base: "/bilisimolimpiyatlari/",
+  build: {
+    outDir: path.resolve(PROJECT_ROOT, "dist-pages"),
+    emptyOutDir: true,
+    rollupOptions: {
+      input: path.resolve(PROJECT_ROOT, "client", "isbo-pages.html"),
+    },
+  },
+});

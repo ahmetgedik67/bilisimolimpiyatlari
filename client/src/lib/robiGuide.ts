@@ -1,5 +1,7 @@
-export const ROBI_THINKING_GIF = "/assets/robi.jpeg";
-export const ROBI_CELEBRATE_IMAGE = "/assets/robi.jpeg";
+const ASSET_BASE = import.meta.env.BASE_URL;
+
+export const ROBI_THINKING_GIF = `${ASSET_BASE}assets/robi.jpeg`;
+export const ROBI_CELEBRATE_IMAGE = `${ASSET_BASE}assets/robi.jpeg`;
 export const ROBI_IMAGE = ROBI_THINKING_GIF;
 
 export const robiMessages = {

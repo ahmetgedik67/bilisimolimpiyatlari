@@ -506,7 +506,7 @@ export default function IsboWorkshop() {
             <>
               <p className="isbo-prompt">{question.prompt}</p>
               {question.image && (
-                <img className="isbo-question-img" src={question.image} alt={`İSBO 2024 soru ${question.number}`} loading="lazy" />
+                <img className="isbo-question-img" src={`${import.meta.env.BASE_URL}${question.image}`} alt={`İSBO 2024 soru ${question.number}`} loading="lazy" />
               )}
               {question.code && <pre className="isbo-code isbo-code--static">{question.code}</pre>}
             </>
