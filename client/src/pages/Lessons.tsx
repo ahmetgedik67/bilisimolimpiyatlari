@@ -81,7 +81,7 @@ export default function Lessons() {
     <div className="lesson-page">
       <header className="lesson-topbar">
         <Link href="/" className="lesson-brand" aria-label="Bilfen Bilişim Teknolojileri Bölümü başlangıç">
-          <img src="/assets/bilfen-logo.png" alt="Bilfen Eğitim Kurumları" className="bilfen-logo" />
+          <img src={`${import.meta.env.BASE_URL}assets/bilfen-logo.png`} alt="Bilfen Eğitim Kurumları" className="bilfen-logo" />
           <span><strong>Bilişim Teknolojileri Bölümü</strong><small>Algoritma Atlası · konu anlatımı</small></span>
         </Link>
         <Link href="/" className="lesson-back"><ArrowLeft size={16} /> Rota görevlerine dön</Link>

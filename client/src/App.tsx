@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Router as WouterRouter, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -11,9 +11,13 @@ import ScienceReasoning from "./pages/ScienceReasoning";
 import IsboWorkshop from "./pages/IsboWorkshop";
 
 function Router() {
+  // GitHub Pages gibi alt yol altında yayınlanan derlemelerde wouter'a base bildir;
+  // ana derlemede BASE_URL="/" olduğu için davranış değişmez.
+  const routerBase = import.meta.env.BASE_URL.replace(/\/$/, "");
   // make sure to consider if you need authentication for certain routes
   return (
-    <Switch>
+    <WouterRouter base={routerBase}>
+      <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/konu-anlatimi"} component={Lessons} />
       <Route path={"/giris"} component={Login} />
@@ -22,7 +26,8 @@ function Router() {
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
-    </Switch>
+      </Switch>
+    </WouterRouter>
   );
 }
 

@@ -1,4 +1,4 @@
-name: Pages - İSBO Soru Atölyesi
+name: Pages - Bilişim Olimpiyatları
 
 on:
   push:
@@ -30,15 +30,14 @@ jobs:
       - name: Bağımlılıkları kur
         run: pnpm install --frozen-lockfile
 
-      - name: İSBO Atölyesi statik derlemesi
+      - name: Tam istemci statik derlemesi
         run: npx vite build --config vite.config.pages.ts
 
       - name: Pages çıktısını hazırla
         run: |
           cd dist-pages
           rm -rf __manus__
-          cp isbo-pages.html index.html
-          cp isbo-pages.html 404.html
+          cp index.html 404.html
           touch .nojekyll
 
       - uses: actions/upload-pages-artifact@v3

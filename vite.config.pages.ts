@@ -5,7 +5,8 @@ import { defineConfig } from "vite";
 
 /**
  * GitHub Pages (bilfen.github.io/bilisimolimpiyatlari) statik derleme yapılandırması.
- * Yalnızca İSBO Soru Atölyesi'ni, sunucu bağımlılığı olmadan derler.
+ * TÜM istemciyi (ana sayfa + tüm rotalar) sunucu olmadan derler; API çağrıları
+ * Pages'te zarif şekilde düşer (ziyaretçi modu).
  */
 const PROJECT_ROOT = import.meta.dirname;
 
@@ -25,8 +26,5 @@ export default defineConfig({
   build: {
     outDir: path.resolve(PROJECT_ROOT, "dist-pages"),
     emptyOutDir: true,
-    rollupOptions: {
-      input: path.resolve(PROJECT_ROOT, "client", "isbo-pages.html"),
-    },
   },
 });

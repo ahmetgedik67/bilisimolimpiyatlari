@@ -25,7 +25,8 @@ describe("Bilim ve Zekâ ek modülü", () => {
     const home = readFileSync(new URL("../client/src/pages/Home.tsx", import.meta.url), "utf8");
     const page = readFileSync(new URL("../client/src/pages/ScienceReasoning.tsx", import.meta.url), "utf8");
     expect(app).toContain('path={"/bilim-zeka"}');
-    expect(home).toContain('href="/bilim-zeka"');
+    // Ana sayfadaki bağlantı base-path uyumlu (GitHub Pages alt yayını için BASE_URL önekli)
+    expect(home).toContain("${import.meta.env.BASE_URL}bilim-zeka");
     expect(page).toContain("Bilge Kunduz/Bebras");
     expect(page).toContain("localStorage");
   });

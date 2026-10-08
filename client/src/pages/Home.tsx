@@ -399,7 +399,7 @@ export default function Home() {
 
       <header className="atlas-topbar">
         <a className="atlas-brand" href="#baslangic" aria-label="Algoritma Atlası başlangıç">
-          <img src="/assets/bilfen-logo.png" alt="Bilfen Eğitim Kurumları" className="bilfen-logo" />
+          <img src={`${import.meta.env.BASE_URL}assets/bilfen-logo.png`} alt="Bilfen Eğitim Kurumları" className="bilfen-logo" />
           <span>
             <strong>Bilişim Teknolojileri Bölümü</strong>
             <small>Algoritma Atlası · ortaokul rota defteri</small>
@@ -408,14 +408,14 @@ export default function Home() {
 
         <div className="topbar-actions">
           <a className="topbar-link" href="#rota">Atlas rotası</a>
-          <a className="topbar-link topbar-link--course" href="/konu-anlatimi">Dersler</a>
-          <a className="topbar-link topbar-link--science" href="/bilim-zeka">Bilim ve Zekâ</a>
-          <a className="topbar-link topbar-link--isbo" href="/isbo-atolyesi">İSBO Atölyesi</a>
+          <a className="topbar-link topbar-link--course" href={`${import.meta.env.BASE_URL}konu-anlatimi`}>Dersler</a>
+          <a className="topbar-link topbar-link--science" href={`${import.meta.env.BASE_URL}bilim-zeka`}>Bilim ve Zekâ</a>
+          <a className="topbar-link topbar-link--isbo" href={`${import.meta.env.BASE_URL}isbo-atolyesi`}>İSBO Atölyesi</a>
           <a className="topbar-link" href="#kaynaklar">Araştırma notu</a>
           {isAuthenticated ? (
-            <a className="topbar-link" href="/giris"><ShieldCheck size={14} /> {user?.name ?? "Hesabım"}</a>
+            <a className="topbar-link" href={`${import.meta.env.BASE_URL}giris`}><ShieldCheck size={14} /> {user?.name ?? "Hesabım"}</a>
           ) : (
-            <a className="topbar-link" href="/giris" title="Öğretmen ve yönetici girişi"><LockKeyhole size={13} /> Yönetici</a>
+            <a className="topbar-link" href={`${import.meta.env.BASE_URL}giris`} title="Öğretmen ve yönetici girişi"><LockKeyhole size={13} /> Yönetici</a>
           )}
         </div>
       </header>
@@ -440,7 +440,7 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-map" role="img" aria-label="Algoritma Atlası için soyut keşif haritası görseli">
-            <img src="/assets/robi.jpeg" alt="" />
+            <img src={`${import.meta.env.BASE_URL}assets/robi.jpeg`} alt="" />
             <aside className="hero-robi" aria-label="Robi ders rehberi">
               <RobiImage src={ROBI_IMAGE} alt="Robi, Bilfen Bilişim Teknolojileri Bölümü ders rehberi" loading="eager" />
               <div>
@@ -609,7 +609,7 @@ export default function Home() {
               <h3><code>for</code> bir sayaçla aynı adımı tekrarlar.</h3>
               <p>Parantez içindeki üç bölüm sırasıyla başlangıç, devam koşulu ve güncellemedir.</p>
             </div>
-            <img src="/assets/robi.jpeg" alt="Değişken değerlerini temsil eden renkli kavanozlar" className="notes-image" />
+            <img src={`${import.meta.env.BASE_URL}assets/robi.jpeg`} alt="Değişken değerlerini temsil eden renkli kavanozlar" className="notes-image" />
             <div className="notes-card">
               <span className="eyebrow eyebrow--ink">Sınav notu</span>
               <p>İSBO şartnamesinde ortaokul bilgisayar ön elemesi 25, 1. aşaması 30 çoktan seçmeli sorudur; iki aşamada da süre 90 dakikadır. Bu alan sınavın resmî kopyası değildir. <a href="#kaynaklar">[1]</a></p>

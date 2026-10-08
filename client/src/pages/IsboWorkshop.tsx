@@ -402,7 +402,7 @@ export default function IsboWorkshop() {
   return (
     <main className="isbo-page">
       <header className="isbo-topbar">
-        <a href="/" className="isbo-back">
+        <a href={import.meta.env.BASE_URL} className="isbo-back">
           <ArrowLeft size={16} /> Atlas'a dön
         </a>
         <div>
