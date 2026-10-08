@@ -585,3 +585,21 @@ button:focus-visible,a:focus-visible { outline:3px solid #ec775b; outline-offset
 .course-note { width:min(1380px,calc(100% - 2rem)); margin:0 auto 2.5rem; padding-top:1rem; border-top:1px dashed rgba(23,63,95,.25); }
 .course-note p { margin:0; font-size:.85rem; color:#6b7d8d; }
 @media (max-width:900px) { .course-hero { grid-template-columns:1fr; } #bolumler.atlas-layout { grid-template-columns:1fr; } }
+/* ==== Giriş: olimpiyat tanıtımı ==== */
+.intro-hero { width:min(1180px,calc(100% - 2rem)); margin:0 auto; padding:clamp(1.4rem,3vw,2.6rem) 0 1rem; display:flex; flex-direction:column; gap:1.1rem; }
+.intro-hero h1 { margin:0; font-family:"DM Serif Display",serif; font-weight:400; font-size:clamp(2.3rem,4.6vw,3.9rem); line-height:1.06; }
+.intro-hero h1 em { font-style:italic; color:#bd594b; }
+.intro-hero > p { margin:0; max-width:70ch; color:#3c5a74; font-size:1.05rem; line-height:1.65; }
+.intro-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; margin-top:.4rem; }
+.intro-card { position:relative; padding:1.35rem 1.4rem; border-radius:1.3rem; background:#fffdf8; border:1px solid rgba(23,63,95,.14); box-shadow:0 10px 24px rgba(23,63,95,.06); }
+.intro-card__no { position:absolute; top:.9rem; right:1.1rem; font-family:"IBM Plex Mono",monospace; font-size:.78rem; color:#bd594b; letter-spacing:.1em; }
+.intro-card h2 { margin:.1rem 0 .6rem; font-family:"DM Serif Display",serif; font-weight:400; font-size:1.32rem; }
+.intro-card p { margin:0; color:#3c5a74; line-height:1.62; font-size:.97rem; }
+.intro-card b { color:#173f5f; }
+.intro-card--why { background:#173f5f; border-color:#173f5f; }
+.intro-card--why h2, .intro-card--why b { color:#e4c95f; }
+.intro-card--why p { color:rgba(245,240,230,.92); }
+.intro-card--why .intro-card__no { color:#e4c95f; }
+.intro-bridge { margin-top:.6rem; padding:1.3rem 1.5rem; border-radius:1.3rem; background:rgba(228,201,95,.16); border:1px dashed rgba(23,63,95,.3); display:flex; align-items:center; justify-content:space-between; gap:1.2rem; flex-wrap:wrap; }
+.intro-bridge p { margin:0; flex:1 1 380px; color:#173f5f; line-height:1.6; }
+@media (max-width:900px) { .intro-bridge { flex-direction:column; align-items:stretch; } }

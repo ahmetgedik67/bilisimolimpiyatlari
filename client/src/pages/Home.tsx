@@ -15,8 +15,6 @@ import {
   Sparkles,
   Wrench,
 } from "lucide-react";
-import { RobiImage } from "@/components/RobiImage";
-import { ROBI_IMAGE } from "@/lib/robiGuide";
 
 /**
  * Bilfen C Yolu — hiç bilmeyen bir öğrenciyi öğretmen gibi adım adım İSBO'ya
@@ -339,36 +337,63 @@ export default function Home() {
       </header>
 
       <main id="kurs">
-        <section className="course-hero">
-          <div>
-            <span className="eyebrow">Bilfen Eğitim Kurumları · Bilişim Teknolojileri Bölümü</span>
-            <h1>C dilini hiç bilmiyorsan<br /><em>doğru yerdesin.</em></h1>
-            <p>
-              Bu yol, sana bir öğretmen gibi adım adım ilerler: önce küçük bir fikir verir,
-              sonra birlikte kodu okur, en sonunda seni tek başına bırakır. Hiç C bilmeyen
-              bir öğrenci buradan İSBO sınav sorularına kadar yürüyebilir.
-            </p>
-            <div className="hero-actions">
-              <a href="#bolumler" className="primary-action">1. bölümden başla <ChevronRight size={17} /></a>
-              <a href={`${import.meta.env.BASE_URL}isbo-atolyesi`} className="quiet-action">İSBO Atölyesi'ne git <ArrowRight size={15} /></a>
-            </div>
-            <div className="hero-facts" aria-label="Yol özeti">
-              <span><BookOpen size={15} /> 6 bölüm · sıfırdan</span>
-              <span><Code2 size={15} /> her bölümde mini soru</span>
-              <span><Wrench size={15} /> sonunda gerçek İSBO pratiği</span>
-            </div>
+        <section className="intro-hero">
+          <span className="eyebrow">Bilfen Eğitim Kurumları · Bilişim Teknolojileri Bölümü</span>
+          <h1>Önce tanışalım:<br />bilim olimpiyatları<em> ne, neden önemli?</em></h1>
+          <p>
+            Merhaba! Bu siteye gelirken belki ilk kez "bilgisayar olimpiyatı" kelimesini duydun.
+            Hiç sorun değil — önce nerede olduğumuzu anlayalım, sonra birlikte adım adım yola çıkalım.
+          </p>
+          <div className="intro-cards">
+            <article className="intro-card">
+              <span className="intro-card__no">01</span>
+              <h2>Bilişim olimpiyatı nedir?</h2>
+              <p>
+                Bilgisayarla problem çözme yarışmasıdır. Amaç bilgisayarı hızlı kullanmak değil;
+                bir problemi küçük adımlara bölüp çözümü mantıkla kurmaktır. Bu düşünme biçimine
+                <b> algoritmik düşünme</b> denir — kod yazmaktan çok, bir düşünme sanatıdır.
+              </p>
+            </article>
+            <article className="intro-card">
+              <span className="intro-card__no">02</span>
+              <h2>İSBO nedir?</h2>
+              <p>
+                <b>İstanbul Bilim Olimpiyatları.</b> İstanbul İl Millî Eğitim Müdürlüğü'nün düzenlediği,
+                ortaokul ve lise öğrencilerine açık bir yarışmadır. Matematik, bilgisayar, fen
+                branşlarında üç aşamalıdır: <b>Ön Eleme → 1. Aşama → 2. Aşama</b>. Bilgisayar
+                branşında C programı verip "ekrana ne yazar?" diye soran, 90 dakikalık çoktan
+                seçmeli sorular gelir — bu sitedeki atölye tam olarak bu sorularla çalışır.
+              </p>
+            </article>
+            <article className="intro-card">
+              <span className="intro-card__no">03</span>
+              <h2>İZBO nedir?</h2>
+              <p>
+                <b>İzmir Bilim Olimpiyatları.</b> İzmir İl Millî Eğitim Müdürlüğü ile Bilim, Eğitim ve
+                Sanat Derneği'nin birlikte düzenlediği kardeş yarışmadır. İlkokuldan liseye;
+                matematik, fen ve bilgisayar alanlarında çevrim içi ön değerlendirme ve yüz yüze
+                final sınavlarıyla uygulanır.
+              </p>
+            </article>
+            <article className="intro-card intro-card--why">
+              <span className="intro-card__no">04</span>
+              <h2>Neden önemli?</h2>
+              <p>
+                Çünkü kazandırdığı şey madalyadan fazlasıdır: problemi parçalara ayırma, sırayı
+                koruma, hataları izleyip bulma. Bu beceriler matematikte, kodda ve hayatın her
+                probleminde işine yarar. İSBO'da da İZBO'da da bilgisayar sorularının temeli aynıdır:
+                <b> mantığını kur, kodu satır satır oku, sonucu önceden gör.</b> Bu yol sana tam bunu öğretir.
+              </p>
+            </article>
           </div>
-          <div className="hero-map" role="img" aria-label="C Yolu öğrenme rotası görseli">
-            <img src={`${import.meta.env.BASE_URL}assets/robi.jpeg`} alt="" />
-            <aside className="hero-robi" aria-label="Robi ders rehberi">
-              <RobiImage src={ROBI_IMAGE} alt="Robi, C Yolu öğrenme rehberi" loading="eager" />
-              <div>
-                <span>ROBİ · DERS REHBERİ</span>
-                <strong>Adım adım, birlikte.</strong>
-                <p>Her bölümde önce sana anlatırım, sonra kodu birlikte okuruz; mini soruyu geçince bir sonraki bölüm açılır.</p>
-              </div>
-            </aside>
-            <div className="map-stamp"><Compass size={16} /> yol 01<br /><b>sıfır öğrenci</b></div>
+          <div className="intro-bridge">
+            <p>
+              Tanıştık! Şimdi sıra seni sınav sorularına hazırlayacak öğrenme yolunda:
+              6 bölümde algoritma, printf, değişkenler, koşullar ve döngüleri öğretmen gibi
+              adım adım öğreneceksin. Her bölümün sonunda mini bir soru var; doğru cevap bir
+              sonraki bölümün kapısını açar.
+            </p>
+            <a href="#bolumler" className="primary-action">Öğrenme yoluna başla <ChevronRight size={17} /></a>
           </div>
         </section>
 
