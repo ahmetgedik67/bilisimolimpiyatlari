@@ -542,3 +542,46 @@ button:focus-visible,a:focus-visible { outline:3px solid #ec775b; outline-offset
   .isbo-card__footer { padding:.8rem .9rem; }
 }
 @media (prefers-reduced-motion:reduce) { .isbo-confetti i, .isbo-strip span.is-hi, .isbo-set b.is-hi { animation:none; } }
+/* ==== C Yolu — sıfırdan öğrenme rotası ==== */
+.course-hero { display:grid; grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); width:min(1440px,100%); margin:0 auto; min-height:500px; padding:clamp(1rem,2.4vw,2rem); }
+.course-hero > div:first-child { padding:clamp(1rem,3vw,3rem); display:flex; flex-direction:column; justify-content:center; gap:1.1rem; }
+.course-hero h1 { margin:0; font-family:"DM Serif Display",serif; font-weight:400; font-size:clamp(2.6rem,5.2vw,4.6rem); line-height:1.02; letter-spacing:-.01em; }
+.course-hero h1 em { font-style:italic; color:#bd594b; }
+.course-hero p { margin:0; max-width:46ch; color:#3c5a74; font-size:1.02rem; line-height:1.65; }
+#bolumler.atlas-layout { grid-template-columns:280px minmax(0,1fr); }
+.course-area { min-width:0; display:flex; flex-direction:column; gap:1.4rem; }
+.course-seal { display:inline-flex; align-items:center; gap:.4rem; padding:.42rem .85rem; border-radius:999px; font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.06em; background:rgba(23,63,95,.08); color:#173f5f; white-space:nowrap; }
+.course-seal.is-done { background:#42a58f; color:#fff; }
+.course-steps { display:flex; flex-direction:column; gap:.9rem; }
+.course-step { display:flex; gap:1rem; padding:1.1rem 1.25rem; border-radius:1.3rem; background:#fffdf8; border:1px solid rgba(23,63,95,.14); box-shadow:0 10px 24px rgba(23,63,95,.06); }
+.course-step.is-current { border-color:#e4c95f; box-shadow:0 12px 28px rgba(228,201,95,.28); }
+.step-badge { flex:0 0 auto; width:2rem; height:2rem; display:grid; place-items:center; border-radius:50%; background:#173f5f; color:#f5f0e6; font-family:"IBM Plex Mono",monospace; font-size:.85rem; }
+.course-step h3 { margin:.1rem 0 .5rem; font-family:"DM Serif Display",serif; font-weight:400; font-size:1.28rem; }
+.course-step p { margin:.25rem 0; color:#3c5a74; line-height:1.62; white-space:pre-line; }
+.course-code { margin:.75rem 0 .2rem; padding:1rem 1.15rem; border-radius:.9rem; background:#173f5f; color:#f5f0e6; font-family:"IBM Plex Mono",monospace; font-size:.88rem; line-height:1.6; overflow-x:auto; }
+.course-next { align-self:flex-start; display:inline-flex; align-items:center; gap:.5rem; padding:.72rem 1.25rem; border-radius:999px; border:none; background:#e4c95f; color:#173f5f; font-weight:700; cursor:pointer; font-family:inherit; transition:transform .15s ease; }
+.course-next:hover { transform:translateY(-2px); }
+.course-quiz { padding:1.3rem 1.4rem; border-radius:1.3rem; background:#173f5f; color:#f5f0e6; box-shadow:0 16px 34px rgba(23,63,95,.2); }
+.course-quiz header h3 { margin:.5rem 0 1rem; font-family:"DM Serif Display",serif; font-weight:400; font-size:1.4rem; }
+.course-quiz .eyebrow--coral { color:#e4c95f; }
+.course-options { display:flex; flex-wrap:wrap; gap:.65rem; }
+.course-options button { padding:.68rem 1.2rem; border-radius:.85rem; border:1px solid rgba(245,240,230,.4); background:rgba(245,240,230,.08); color:#f5f0e6; font-family:"IBM Plex Mono",monospace; font-size:.95rem; cursor:pointer; transition:background .15s ease, transform .15s ease; }
+.course-options button:hover:not(:disabled) { background:rgba(245,240,230,.2); transform:translateY(-2px); }
+.course-options button.is-correct { background:#42a58f; border-color:#42a58f; color:#fff; }
+.course-options button.is-wrong { background:#bd594b; border-color:#bd594b; color:#fff; }
+.course-options button.is-answer { border-color:#42a58f; box-shadow:0 0 0 2px rgba(66,165,143,.55); }
+.course-feedback { margin-top:1.05rem; padding:1rem 1.15rem; border-radius:.95rem; background:rgba(245,240,230,.1); }
+.course-feedback.is-good { border-left:4px solid #42a58f; }
+.course-feedback.is-bad { border-left:4px solid #bd594b; }
+.course-feedback p { margin:0 0 .8rem; line-height:1.6; }
+.course-feedback b { font-family:"DM Serif Display",serif; font-weight:400; font-size:1.05rem; }
+.course-feedback > div { display:flex; gap:.7rem; flex-wrap:wrap; }
+.course-feedback button, .course-advance { display:inline-flex; align-items:center; gap:.45rem; padding:.55rem 1rem; border-radius:999px; border:1px solid rgba(245,240,230,.45); background:transparent; color:#f5f0e6; cursor:pointer; font-family:inherit; font-size:.9rem; text-decoration:none; }
+.course-advance { background:#e4c95f; border-color:#e4c95f; color:#173f5f; font-weight:700; }
+.course-finish { padding:1.5rem 1.6rem; border-radius:1.4rem; background:#42a58f; color:#fff; box-shadow:0 16px 34px rgba(66,165,143,.3); }
+.course-finish h3 { margin:.1rem 0 .6rem; font-family:"DM Serif Display",serif; font-weight:400; font-size:1.55rem; }
+.course-finish p { margin:0 0 1.1rem; line-height:1.65; color:rgba(255,255,255,.92); }
+.course-finish .primary-action { background:#173f5f; color:#f5f0e6; }
+.course-note { width:min(1380px,calc(100% - 2rem)); margin:0 auto 2.5rem; padding-top:1rem; border-top:1px dashed rgba(23,63,95,.25); }
+.course-note p { margin:0; font-size:.85rem; color:#6b7d8d; }
+@media (max-width:900px) { .course-hero { grid-template-columns:1fr; } #bolumler.atlas-layout { grid-template-columns:1fr; } }

@@ -5,7 +5,6 @@ import { Router as WouterRouter, Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import Lessons from "./pages/Lessons";
 import Login from "./pages/Login";
 import ScienceReasoning from "./pages/ScienceReasoning";
 import IsboWorkshop from "./pages/IsboWorkshop";
@@ -19,7 +18,6 @@ function Router() {
     <WouterRouter base={routerBase}>
       <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/konu-anlatimi"} component={Lessons} />
       <Route path={"/giris"} component={Login} />
       <Route path={"/bilim-zeka"} component={ScienceReasoning} />
       <Route path={"/isbo-atolyesi"} component={IsboWorkshop} />
