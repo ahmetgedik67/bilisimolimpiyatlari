@@ -7,14 +7,17 @@ import {
   Code2,
   Compass,
   Eye,
+  Flag,
   Lightbulb,
   LockKeyhole,
   RefreshCw,
   Repeat,
   ShieldCheck,
   Sparkles,
+  Target,
   Wrench,
 } from "lucide-react";
+import { Trace100Panel } from "@/components/Trace100Panel";
 
 /**
  * Bilfen C Yolu — hiç bilmeyen bir öğrenciyi öğretmen gibi adım adım İSBO'ya
@@ -287,6 +290,7 @@ export default function Home() {
   const isLastStep = stepIndex >= activeChapter.steps.length - 1;
   const completedCount = progress.completedChapterIds.length;
   const isCourseDone = completedCount >= CHAPTERS.length;
+  const campUnlocked = progress.completedChapterIds.includes("sinav-provasi");
 
   function goToChapter(id: string) {
     setActiveChapterId(id);
@@ -391,7 +395,8 @@ export default function Home() {
               Tanıştık! Şimdi sıra seni sınav sorularına hazırlayacak öğrenme yolunda:
               6 bölümde algoritma, printf, değişkenler, koşullar ve döngüleri öğretmen gibi
               adım adım öğreneceksin. Her bölümün sonunda mini bir soru var; doğru cevap bir
-              sonraki bölümün kapısını açar.
+              sonraki bölümün kapısını açar. Yolun sonunda 35 görevlik İz sürme kampı ve
+              gerçek İSBO sorularıyla dolu atölye seni bekliyor.
             </p>
             <a href="#bolumler" className="primary-action">Öğrenme yoluna başla <ChevronRight size={17} /></a>
           </div>
@@ -427,11 +432,20 @@ export default function Home() {
                       <span className="mission-index">{completed ? <Check size={13} /> : chapter.no}</span>
                       <span className="mission-copy"><b>{chapter.title}</b><small>{chapter.label}</small></span>
                       {available ? <Icon size={16} /> : <LockKeyhole size={15} />}
-                    </button>
-                    {index < CHAPTERS.length - 1 && <i className="route-line" aria-hidden="true" />}
-                  </li>
-                );
-              })}
+                    </button>              {index < CHAPTERS.length - 1 && <i className="route-line" aria-hidden="true" />}
+                </li>
+              );
+            })}
+              <li className={campUnlocked ? "" : "is-locked"}>
+                <button
+                  onClick={() => campUnlocked && document.getElementById("kamp")?.scrollIntoView({ behavior: "smooth" })}
+                  disabled={!campUnlocked}
+                >
+                  <span className="mission-index">{campUnlocked ? <Flag size={13} /> : <LockKeyhole size={15} />}</span>
+                  <span className="mission-copy"><b>İz sürme kampı</b><small>35 görev</small></span>
+                  {campUnlocked ? <Target size={16} /> : <LockKeyhole size={15} />}
+                </button>
+              </li>
             </ol>
             <div className="rail-note"><Lightbulb size={16} /><span>Bölümler sırayla açılır: her mini soru, bir sonraki bölümün anahtarıdır.</span></div>
           </aside>
@@ -517,16 +531,52 @@ export default function Home() {
 
             {isCourseDone && (
               <article className="course-finish">
-                <h3>Öğrenme yolunu bitirdin — sıra pratikte!</h3>
+                <h3>Bölümleri bitirdin — şimdi kamp zamanı!</h3>
                 <p>
                   Sıra, printf, değişken, koşul ve döngü… İSBO kod sorularının beş aracı artık sende.
-                  Atölyede 2024 ön eleme sorularını Oku → Ayıştır → İzle → Yorumla → Yanıtla adımlarıyla
-                  çözeceksin; her soruda az önce kullandığın kutuları güncel tutma yöntemi karşına çıkacak.
+                  Aşağıdaki 35 görevlik İz sürme kampında becerini kolaydan zora pekiştir;
+                  kamp sonunda İSBO Atölyesi'nde gerçek sınav soruları seni bekliyor.
                 </p>
-                <a className="primary-action" href={`${import.meta.env.BASE_URL}isbo-atolyesi`}>İSBO Atölyesi'ne git <ArrowRight size={15} /></a>
+                <a className="primary-action" href="#kamp">İz sürme kampına başla <ArrowRight size={15} /></a>
               </article>
             )}
           </div>
+        </section>
+
+        <section id="kamp" className="camp-section">
+          <header className="camp-head">
+            <div>
+              <span className="eyebrow eyebrow--ink"><Target size={14} /> öğrenme yolunun son durağı</span>
+              <h2>İz sürme kampı</h2>
+              <p>
+                35 özgün C görevi, kolaydan zora. Kodu oku, değerleri satır satır güncelle,
+                ipucu istersen Robi bakılacak yeri işaret etsin; sonra tahminini seç.
+              </p>
+            </div>
+            <span className={`course-seal ${campUnlocked ? "is-done" : ""}`}>
+              {campUnlocked ? <><Flag size={14} /> açık</> : <><LockKeyhole size={14} /> kilitli</>}
+            </span>
+          </header>
+          {campUnlocked ? (
+            <Trace100Panel
+              isAuthenticated={false}
+              savedCompletedIds={[]}
+              onStepCompleted={() => {}}
+              onRouteCompleted={() => setNotice("35 görevi tamamladın! Artık İSBO Atölyesi'nde gerçek sınav sorularına geçebilirsin.")}
+            />
+          ) : (
+            <div className="camp-locked">
+              <LockKeyhole size={22} />
+              <div>
+                <strong>Bu kamp, 6 bölümlük yolu bitirenlere açılır.</strong>
+                <p>
+                  Önce bölümlerdeki mini soruları çöz; "Sınav provası" bölümünü tamamladığında
+                  kampın 35 görevi burada belirecek.
+                </p>
+              </div>
+              <a className="primary-action" href="#bolumler">Bölümlere dön <ArrowRight size={15} /></a>
+            </div>
+          )}
         </section>
 
         <section className="course-note">

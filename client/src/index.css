@@ -603,3 +603,14 @@ button:focus-visible,a:focus-visible { outline:3px solid #ec775b; outline-offset
 .intro-bridge { margin-top:.6rem; padding:1.3rem 1.5rem; border-radius:1.3rem; background:rgba(228,201,95,.16); border:1px dashed rgba(23,63,95,.3); display:flex; align-items:center; justify-content:space-between; gap:1.2rem; flex-wrap:wrap; }
 .intro-bridge p { margin:0; flex:1 1 380px; color:#173f5f; line-height:1.6; }
 @media (max-width:900px) { .intro-bridge { flex-direction:column; align-items:stretch; } }
+/* ==== İz sürme kampı kapısı ==== */
+.camp-section { width:min(1380px,calc(100% - 2rem)); margin:0 auto 3rem; display:flex; flex-direction:column; gap:1.3rem; }
+.camp-head { display:flex; justify-content:space-between; align-items:flex-start; gap:1.2rem; }
+.camp-head h2 { margin:.2rem 0 .5rem; font-family:"DM Serif Display",serif; font-weight:400; font-size:clamp(1.8rem,3vw,2.5rem); }
+.camp-head p { margin:0; max-width:64ch; color:#3c5a74; line-height:1.62; }
+.camp-locked { display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; padding:1.4rem 1.5rem; border-radius:1.3rem; background:rgba(23,63,95,.06); border:1px dashed rgba(23,63,95,.35); }
+.camp-locked svg { color:#173f5f; flex:0 0 auto; }
+.camp-locked > div { flex:1 1 340px; }
+.camp-locked strong { display:block; font-family:"DM Serif Display",serif; font-weight:400; font-size:1.2rem; margin-bottom:.35rem; }
+.camp-locked p { margin:0; color:#3c5a74; line-height:1.55; }
+@media (max-width:720px) { .camp-head { flex-direction:column; } }
