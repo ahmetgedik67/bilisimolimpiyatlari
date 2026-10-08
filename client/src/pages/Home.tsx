@@ -9,6 +9,7 @@ import {
   Eye,
   Flag,
   Lightbulb,
+  ListChecks,
   LockKeyhole,
   RefreshCw,
   Repeat,
@@ -18,6 +19,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { Trace100Panel } from "@/components/Trace100Panel";
+import { TRACE_STEP_COUNT } from "@/lib/trace35";
 
 /**
  * Bilfen C Yolu — hiç bilmeyen bir öğrenciyi öğretmen gibi adım adım İSBO'ya
@@ -254,6 +256,20 @@ const CHAPTERS: Chapter[] = [
 ] as const;
 
 const STORAGE_KEY = "bilfen-c-yolu-progress";
+const TRACE_STORAGE_KEY = "algoritma-atlasi-trace-35-v1";
+
+/** Kamp panelinin tarayıcıda sakladığı tamamlanan görev sayısını okur. */
+function readTraceDone(): number {
+  try {
+    const raw = window.localStorage.getItem(TRACE_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed)
+      ? parsed.filter((item): item is number => Number.isInteger(item) && item >= 1 && item <= TRACE_STEP_COUNT).length
+      : 0;
+  } catch {
+    return 0;
+  }
+}
 
 type ProgressState = { completedChapterIds: string[] };
 
@@ -273,12 +289,14 @@ export default function Home() {
   const [activeChapterId, setActiveChapterId] = useState<string>(CHAPTERS[0].id);
   const [stepIndex, setStepIndex] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
-  const [notice, setNotice] = useState("Hoş geldin! Hiç bilmeden başlamak serbest — Robi her adımda yanında.");
+  const [notice, setNotice] = useState("Hoş geldin! Yol üç adımdan oluşuyor: öğren, iz sür, sınavda göster. Her adım bir sonrakini açar.");
+  const [traceDone, setTraceDone] = useState(0);
   const hasHydrated = useRef(false);
 
   useEffect(() => {
     const parsed = parseProgress(window.localStorage.getItem(STORAGE_KEY));
     setProgress(parsed);
+    setTraceDone(readTraceDone());
     const firstOpen = CHAPTERS.find((chapter) => !parsed.completedChapterIds.includes(chapter.id)) ?? CHAPTERS[0];
     setActiveChapterId(firstOpen.id);
     hasHydrated.current = true;
@@ -296,6 +314,12 @@ export default function Home() {
   const completedCount = progress.completedChapterIds.length;
   const isCourseDone = completedCount >= CHAPTERS.length;
   const campUnlocked = progress.completedChapterIds.includes("sinav-provasi");
+  const atolyeUnlocked = traceDone >= TRACE_STEP_COUNT;
+
+  function scrollToSection(id: string, lockedMessage?: string) {
+    if (lockedMessage) setNotice(lockedMessage);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  }
 
   function goToChapter(id: string) {
     setActiveChapterId(id);
@@ -339,7 +363,19 @@ export default function Home() {
 
         <div className="topbar-actions">
           <a className="topbar-link" href="#bolumler">Bölümler</a>
-          <a className="topbar-link topbar-link--isbo" href={`${import.meta.env.BASE_URL}isbo-atolyesi`}>İSBO Atölyesi</a>
+          <a
+            className={`topbar-link topbar-link--isbo ${atolyeUnlocked ? "" : "topbar-link--locked"}`}
+            href={atolyeUnlocked ? `${import.meta.env.BASE_URL}isbo-atolyesi` : "#atolye"}
+            title={atolyeUnlocked ? "Soru Atölyesi" : "İz sürme kampı bitince açılır"}
+            onClick={(event) => {
+              if (!atolyeUnlocked) {
+                event.preventDefault();
+                scrollToSection("atolye", "Soru Atölyesi kilitli: önce 6 bölümü, sonra 35 görevlik İz sürme kampını bitir.");
+              }
+            }}
+          >
+            {atolyeUnlocked ? null : <LockKeyhole size={12} />} Soru Atölyesi
+          </a>
           <a className="topbar-link topbar-link--science" href={`${import.meta.env.BASE_URL}bilim-zeka`}>Bilim ve Zekâ</a>
           <a className="topbar-link" href={`${import.meta.env.BASE_URL}giris`} title="Öğretmen ve yönetici girişi"><ShieldCheck size={14} /> Yönetici</a>
         </div>
@@ -407,6 +443,43 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="journey-strip" aria-label="Üç adımlı öğrenme rotası">
+          <span className="eyebrow eyebrow--ink"><Compass size={14} /> rota: üç adım, sırayla ilerle</span>
+          <ol className="journey-steps">
+            <li className={`${isCourseDone ? "is-done" : "is-active"}`}>
+              <button type="button" onClick={() => scrollToSection("bolumler")}>
+                <span className="journey-step__no">{isCourseDone ? <Check size={13} /> : "1"}</span>
+                <span className="journey-step__copy"><b>Öğrenme yolu</b><small>6 bölümle C'yi sıfırdan öğren</small></span>
+                <span className="journey-step__state">{completedCount} / {CHAPTERS.length}</span>
+              </button>
+            </li>
+            <li className={`${!campUnlocked ? "is-locked" : traceDone >= TRACE_STEP_COUNT ? "is-done" : "is-active"}`}>
+              <button
+                type="button"
+                disabled={!campUnlocked}
+                onClick={() => scrollToSection("kamp")}
+                title={!campUnlocked ? "Öğrenme yolunu bitirince açılır" : undefined}
+              >
+                <span className="journey-step__no">{traceDone >= TRACE_STEP_COUNT ? <Check size={13} /> : "2"}</span>
+                <span className="journey-step__copy"><b>İz sürme kampı</b><small>35 görevle kod izlemeyi pekiştir</small></span>
+                <span className="journey-step__state">{campUnlocked ? `${traceDone} / ${TRACE_STEP_COUNT}` : <LockKeyhole size={13} />}</span>
+              </button>
+            </li>
+            <li className={`${atolyeUnlocked ? "is-active" : "is-locked"}`}>
+              <button
+                type="button"
+                disabled={!atolyeUnlocked}
+                onClick={() => scrollToSection("atolye")}
+                title={!atolyeUnlocked ? "Kampı bitirince açılır" : undefined}
+              >
+                <span className="journey-step__no">3</span>
+                <span className="journey-step__copy"><b>Soru Atölyesi</b><small>Gerçek İSBO sorularıyla prova</small></span>
+                <span className="journey-step__state">{atolyeUnlocked ? <Check size={13} /> : <LockKeyhole size={13} />}</span>
+              </button>
+            </li>
+          </ol>
+        </section>
+
         <section className="atlas-ribbon" aria-label="İlerleme">
           <p role="status"><Sparkles size={16} /> {notice}</p>
           <div>
@@ -419,7 +492,7 @@ export default function Home() {
           <aside className="route-rail" aria-label="Bölüm listesi">
             <div className="rail-heading">
               <span>öğrenme yolu</span>
-              <strong>{isCourseDone ? "tüm bölümler tamam" : `sırada: ${CHAPTERS.find((c) => !progress.completedChapterIds.includes(c.id))?.title ?? "İSBO atölyesi"}`}</strong>
+              <strong>{isCourseDone ? "tüm bölümler tamam" : `sırada: ${CHAPTERS.find((c) => !progress.completedChapterIds.includes(c.id))?.title ?? "İz sürme kampı"}`}</strong>
             </div>
             <ol className="mission-list">
               {CHAPTERS.map((chapter, index) => {
@@ -526,8 +599,8 @@ export default function Home() {
                         </button>
                       )}
                       {picked === activeChapter.quiz.answer && activeIndex === CHAPTERS.length - 1 && (
-                        <a className="course-advance" href={`${import.meta.env.BASE_URL}isbo-atolyesi`}>
-                          İSBO Atölyesi'ne geç <ArrowRight size={14} />
+                        <a className="course-advance" href="#kamp">
+                          İz sürme kampına geç <ArrowRight size={14} />
                         </a>
                       )}
                     </div>
@@ -542,7 +615,7 @@ export default function Home() {
                 <p>
                   Sıra, printf, değişken, koşul ve döngü… İSBO kod sorularının beş aracı artık sende.
                   Aşağıdaki 35 görevlik İz sürme kampında becerini kolaydan zora pekiştir;
-                  kamp sonunda İSBO Atölyesi'nde gerçek sınav soruları seni bekliyor.
+                  kamp sonunda Soru Atölyesi'nde gerçek sınav soruları seni bekliyor.
                 </p>
                 <a className="primary-action" href="#kamp">İz sürme kampına başla <ArrowRight size={15} /></a>
               </article>
@@ -553,11 +626,11 @@ export default function Home() {
         <section id="kamp" className="camp-section">
           <header className="camp-head">
             <div>
-              <span className="eyebrow eyebrow--ink"><Target size={14} /> öğrenme yolunun son durağı</span>
+              <span className="eyebrow eyebrow--ink"><Target size={14} /> ikinci adım · kod izleme kampı</span>
               <h2>İz sürme kampı</h2>
               <p>
                 35 özgün C görevi, kolaydan zora. Kodu oku, değerleri satır satır güncelle,
-                ipucu istersen Robi bakılacak yeri işaret etsin; sonra tahminini seç.
+                ipucu istersen bilge sana bakılacak yeri gösterir; sonra tahminini seç.
               </p>
             </div>
             <span className={`course-seal ${campUnlocked ? "is-done" : ""}`}>
@@ -568,8 +641,11 @@ export default function Home() {
             <Trace100Panel
               isAuthenticated={false}
               savedCompletedIds={[]}
-              onStepCompleted={() => {}}
-              onRouteCompleted={() => setNotice("35 görevi tamamladın! Artık İSBO Atölyesi'nde gerçek sınav sorularına geçebilirsin.")}
+              onStepCompleted={() => setTraceDone(readTraceDone())}
+              onRouteCompleted={() => {
+                setTraceDone(TRACE_STEP_COUNT);
+                setNotice("35 görevi tamamladın! Soru Atölyesi açıldı — gerçek İSBO soruları seni bekliyor.");
+              }}
             />
           ) : (
             <div className="camp-locked">
@@ -582,6 +658,48 @@ export default function Home() {
                 </p>
               </div>
               <a className="primary-action" href="#bolumler">Bölümlere dön <ArrowRight size={15} /></a>
+            </div>
+          )}
+        </section>
+
+        <section id="atolye" className="atolye-section">
+          <header className="camp-head">
+            <div>
+              <span className="eyebrow eyebrow--ink"><ListChecks size={14} /> üçüncü adım · sınav provası</span>
+              <h2>Soru Atölyesi</h2>
+              <p>
+                Rotanın son durağı: gerçek İSBO soruları (25 sınav sorusu + 5 özgün alıştırma).
+                Her soruda Oku → Ayıştır → İzle → Yorumla → Yanıtla aşamalarıyla çözümünü gerekçelendirirsin.
+              </p>
+            </div>
+            <span className={`course-seal ${atolyeUnlocked ? "is-done" : ""}`}>
+              {atolyeUnlocked ? <><Flag size={14} /> açık</> : <><LockKeyhole size={14} /> kilitli</>}
+            </span>
+          </header>
+          {atolyeUnlocked ? (
+            <div className="atolye-open">
+              <div>
+                <strong>Kampı bitirdin — sınav provası zamanı!</strong>
+                <p>
+                  Kampın 35 görevinde tüm iz sürme araçlarını kullandın. Şimdi gerçek İSBO sorularıyla
+                  kendini sına; her soruda beş aşamalı çözüm yöntemi yanında.
+                </p>
+              </div>
+              <a className="primary-action" href={`${import.meta.env.BASE_URL}isbo-atolyesi`}>Soru Atölyesi'ne gir <ArrowRight size={15} /></a>
+            </div>
+          ) : (
+            <div className="camp-locked">
+              <LockKeyhole size={22} />
+              <div>
+                <strong>Soru Atölyesi, İz sürme kampını bitirenlere açılır.</strong>
+                <p>
+                  Önce 6 bölümlük öğrenme yolunu tamamla, sonra kampın 35 görevini çöz.
+                  Şu an kamp ilerlemen: {traceDone} / {TRACE_STEP_COUNT} görev.
+                </p>
+              </div>
+              <a className="primary-action" href={campUnlocked ? "#kamp" : "#bolumler"}>
+                {campUnlocked ? "Kampa dön" : "Bölümlere dön"} <ArrowRight size={15} />
+              </a>
             </div>
           )}
         </section>

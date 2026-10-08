@@ -17,8 +17,8 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import { RobiImage } from "@/components/RobiImage";
-import { ROBI_IMAGE } from "@/lib/robiGuide";
+import { ThinkerImage } from "@/components/ThinkerImage";
+import { THINKER_IMAGE } from "@/lib/thinkerGuide";
 import { ISBO_EXAM_QUESTIONS } from "@/lib/isboExamQuestions";
 import { ISBO_DRILL_QUESTIONS, type AnimStep, type IsboQuestion } from "@/lib/isboQuestions";
 
@@ -437,9 +437,9 @@ export default function IsboWorkshop() {
           </div>
         </div>
         <div className="isbo-hero__guide">
-          <RobiImage src={ROBI_IMAGE} alt="Robi, İSBO atölyesi rehberi" />
+          <ThinkerImage src={THINKER_IMAGE} alt="Ada Lovelace portresi; İSBO atölyesi rehberi" />
           <div>
-            <span>ROBİ'NİN İŞARETİ</span>
+            <span>ADA LOVELACE'İN İŞARETİ</span>
             <strong>Önce izle, sonra gerekçelendir.</strong>
             <div className="isbo-stats">
               <span>
@@ -654,9 +654,9 @@ export default function IsboWorkshop() {
               <i key={index} style={{ ["--i" as string]: index } as React.CSSProperties} />
             ))}
           </div>
-          <RobiImage src={ROBI_IMAGE} alt="Robi kutlama yapıyor" />
+          <ThinkerImage src={THINKER_IMAGE} alt="Ada Lovelace portresi; bilgisayar biliminin öncüsü" />
           <strong>Harika gerekçelendirme!</strong>
-          <span>Robi seninle gurur duyuyor.</span>
+          <span>Ada ve bilgisayar biliminin öncüleri seninle gurur duyuyor.</span>
           <button
             type="button"
             className="isbo-sound-toggle"

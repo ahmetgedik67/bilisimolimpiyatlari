@@ -1,8 +1,8 @@
 import { Check, ChevronRight, Clock3, Lightbulb, LockKeyhole, Sparkles, Target } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createAnswerUnlockAt, getAnswerSecondsLeft, isAnswerLocked as isAnswerLockActive } from "@/lib/answerLock";
-import { ROBI_CELEBRATE_IMAGE, ROBI_THINKING_GIF } from "@/lib/robiGuide";
-import { RobiImage } from "@/components/RobiImage";
+import { THINKER_CELEBRATE_IMAGE, THINKER_NAMES, THINKER_THINKING_IMAGE } from "@/lib/thinkerGuide";
+import { ThinkerImage } from "@/components/ThinkerImage";
 import { getTrace35Task, TRACE_STEP_COUNT } from "@/lib/trace35";
 import { trpc } from "@/lib/trpc";
 
@@ -42,7 +42,7 @@ export function Trace100Panel({ isAuthenticated, savedCompletedIds, onStepComple
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [unlockAt, setUnlockAt] = useState(() => createAnswerUnlockAt(Date.now()));
   const [nowMs, setNowMs] = useState(() => Date.now());
-  const [robiMood, setRobiMood] = useState<"thinking" | "celebrate">("thinking");
+  const [thinkerMood, setThinkerMood] = useState<"thinking" | "celebrate">("thinking");
   const startedAtRef = useRef(Date.now());
   const answerLockedRef = useRef(true);
   const completeTraceStep = trpc.learning.completeTraceStep.useMutation();
@@ -73,7 +73,7 @@ export function Trace100Panel({ isAuthenticated, savedCompletedIds, onStepComple
     setUnlockAt(createAnswerUnlockAt(now));
     setSelectedAnswer(null);
     setHintStep(-1);
-    setRobiMood("thinking");
+    setThinkerMood("thinking");
   }, [activeStep, variant]);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export function Trace100Panel({ isAuthenticated, savedCompletedIds, onStepComple
     }
 
     if (isAuthenticated) completeTraceStep.mutate({ traceStepId: currentTask.id, durationSeconds, isCorrect: true });
-    setRobiMood("celebrate");
+    setThinkerMood("celebrate");
     setCompletedSteps((current) => Array.from(new Set([...current, activeStep])).sort((a, b) => a - b));
     onStepCompleted(currentTask.id);
 
@@ -132,11 +132,11 @@ export function Trace100Panel({ isAuthenticated, savedCompletedIds, onStepComple
       </div>
 
       <div className="silent-task-stage trace100-stage">
-        <aside className="silent-guide" aria-label="Robi iz sürme rehberi">
-          <span className="silent-guide__label">Robi · {robiMood === "celebrate" ? "kutlama modu" : "düşünme modu"}</span>
-          <RobiImage className={`robi-guide-motion robi-guide-motion--${robiMood}`} src={robiMood === "celebrate" ? ROBI_CELEBRATE_IMAGE : ROBI_THINKING_GIF} alt={robiMood === "celebrate" ? "Robi doğru cevap için zıplarken OK işareti yapıyor" : "Robi düşünürken başını kaşıyor"} />
-          <strong>{robiMood === "celebrate" ? "Harika iz sürdün!" : "Önce izle, sonra karar ver."}</strong>
-          <p>{robiMood === "celebrate" ? "Bu aşamanın kuralını kendi izinle buldun." : "Sonucu söylemem; bakılacak değeri, koşulu ya da sayacı birlikte buluruz."}</p>
+        <aside className="silent-guide" aria-label="Bilge iz sürme rehberi">
+          <span className="silent-guide__label">{thinkerMood === "celebrate" ? `${THINKER_NAMES.celebrate} · kutlama modu` : `${THINKER_NAMES.thinking} · düşünme modu`}</span>
+          <ThinkerImage className={`robi-guide-motion robi-guide-motion--${thinkerMood}`} src={thinkerMood === "celebrate" ? THINKER_CELEBRATE_IMAGE : THINKER_THINKING_IMAGE} alt={thinkerMood === "celebrate" ? "Grace Hopper portresi; bilgisayar biliminin öncüsü kutlama modunda" : "Albert Einstein portresi; düşünür"} />
+          <strong>{thinkerMood === "celebrate" ? "Harika iz sürdün!" : "Önce izle, sonra karar ver."}</strong>
+          <p>{thinkerMood === "celebrate" ? "Bu aşamanın kuralını kendi izinle buldun." : "Sonucu söylemem; bakılacak değeri, koşulu ya da sayacı birlikte buluruz."}</p>
         </aside>
 
         <article className="code-mission" aria-labelledby="trace100-task-title">
@@ -150,7 +150,7 @@ export function Trace100Panel({ isAuthenticated, savedCompletedIds, onStepComple
           <div className="code-grid">
             <pre aria-label="C kodu örneği"><code>{currentTask.code}</code></pre>
             <div className="trace-panel">
-              <span className="trace-label">Robi'nin iz sürme alanı</span>
+              <span className="trace-label">Bilgenin iz sürme alanı</span>
               <p>İpucu sonucu değil, dikkat edilmesi gereken işlemi gösterir.</p>
               <button className="trace-toggle" onClick={() => setHintStep((current) => Math.min(current + 1, currentTask.hints.length - 1))} aria-expanded={hintStep >= 0} disabled={hintStep >= currentTask.hints.length - 1}>{hintStep < 0 ? "İpucu al" : hintStep === currentTask.hints.length - 1 ? "İpuçları açık" : "Bir ipucu daha"} <ChevronRight size={15} /></button>
               {hintStep >= 0 && <ol className="trace-steps" aria-label="Kademeli görev ipuçları">{currentTask.hints.slice(0, hintStep + 1).map((hint, index) => <li key={hint}><span>ipucu {index + 1}</span><b>{hint}</b></li>)}</ol>}
@@ -166,7 +166,7 @@ export function Trace100Panel({ isAuthenticated, savedCompletedIds, onStepComple
               return <button key={option} onClick={() => chooseAnswer(option)} disabled={isLocked || selectedAnswer !== null} className={selectedAnswer === option ? (option === currentTask.answer ? "is-correct" : "is-wrong") : ""} aria-pressed={selectedAnswer === option} aria-label={`${choiceLabel} şıkkı: ${option}`}><span className="answer-choice-letter" aria-hidden="true">{choiceLabel}</span><span>{option}</span></button>;
             })}</div>
           </div>
-          {selectedAnswer && <div className={`feedback-note ${selectedAnswer === currentTask.answer ? "feedback-note--success" : "feedback-note--hint"}`} role="status">{selectedAnswer === currentTask.answer ? <Check size={18} /> : <Lightbulb size={18} />}<div><strong>{selectedAnswer === currentTask.answer ? "İz tamamlandı." : "Yeni bir iz geliyor."}</strong><span>{selectedAnswer === currentTask.answer ? "Robi kutluyor; sıradaki aşama hazırlanıyor." : "Aynı kazanım, farklı değerlerle yeniden geliyor. İpuçları da baştan açılacak."}</span></div></div>}
+          {selectedAnswer && <div className={`feedback-note ${selectedAnswer === currentTask.answer ? "feedback-note--success" : "feedback-note--hint"}`} role="status">{selectedAnswer === currentTask.answer ? <Check size={18} /> : <Lightbulb size={18} />}<div><strong>{selectedAnswer === currentTask.answer ? "İz tamamlandı." : "Yeni bir iz geliyor."}</strong><span>{selectedAnswer === currentTask.answer ? "Bilge kutluyor; sıradaki aşama hazırlanıyor." : "Aynı kazanım, farklı değerlerle yeniden geliyor. İpuçları da baştan açılacak."}</span></div></div>}
         </article>
       </div>
     </section>

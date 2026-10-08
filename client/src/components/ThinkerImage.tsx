@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type RobiImageProps = {
+type ThinkerImageProps = {
   src: string;
   alt: string;
   className?: string;
@@ -12,7 +12,7 @@ export function shouldSimulateFailure() {
   return new URLSearchParams(window.location.search).get("qaRobiFallback") === "1";
 }
 
-export function RobiImage({ src, alt, className, loading = "lazy" }: RobiImageProps) {
+export function ThinkerImage({ src, alt, className, loading = "lazy" }: ThinkerImageProps) {
   const [failed, setFailed] = useState(shouldSimulateFailure);
 
   if (failed) {
@@ -21,9 +21,9 @@ export function RobiImage({ src, alt, className, loading = "lazy" }: RobiImagePr
         className={`robi-image-fallback ${className ?? ""}`}
         role="img"
         aria-label={`${alt}; görsel yüklenemedi`}
-        data-testid="robi-image-fallback"
+        data-testid="thinker-image-fallback"
       >
-        Robi<span>rehber</span>
+        Bilge<span>rehber</span>
       </span>
     );
   }
