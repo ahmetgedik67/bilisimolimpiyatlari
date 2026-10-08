@@ -33,6 +33,8 @@ type CourseStep = {
 
 type CourseQuiz = {
   question: string;
+  /** Soruda çözülenecek C kodu; "çıktı ne olur" tipi sorularda gösterilir. */
+  code?: string;
   options: string[];
   answer: string;
   explanation: string;
@@ -142,10 +144,11 @@ const CHAPTERS: Chapter[] = [
     ],
     quiz: {
       question: "Bu kodun çıktısı ne olur?",
+      code: 'int x = 7;\nint y = x;\nx = 20;\nprintf("%d", y);',
       options: ["20", "7", "Hata verir"],
       answer: "7",
       explanation:
-        "int y = x; satırı, x'in O ANKİ değeri olan 7'yi y kutusuna KOPYALAR. Sonra x = 20 olsa bile y'nin kutusu değişmez; kopya asıldan bağımsızdır. İSBO'nun en sevdiği tuzaklardan biri tam olarak budur.",
+        "int y = x; satırı, x'in O ANKİ değeri olan 7'yi y kutusuna KOPYALAR. Sonra x = 20 olsa bile y'nin kutusu değişmez; kopya asıldan bağımsızdır. İSBO'nun en sevdiği tuzaklardan biri tam olarak budur. (Ders adımındaki x = x + 4 kodundan farklı bir soru: burada kopyalama test ediliyor.)",
     },
   },
   {
@@ -208,6 +211,7 @@ const CHAPTERS: Chapter[] = [
     ],
     quiz: {
       question: "Bu kodun çıktısı ne olur?",
+      code: 'int carpim = 1;\nfor (int i = 1; i <= 4; i++) {\n  carpim = carpim * 2;\n}\nprintf("%d", carpim);',
       options: ["4", "8", "16", "24"],
       answer: "16",
       explanation:
@@ -240,6 +244,7 @@ const CHAPTERS: Chapter[] = [
     ],
     quiz: {
       question: "Bu kodun çıktısı ne olur?",
+      code: 'int a = 2;\nfor (int i = 0; i < 3; i++) {\n  a = a + i;\n}\nif (a > 4) {\n  printf("BÜYÜK");\n} else {\n  printf("KÜÇÜK");\n}',
       options: ["BÜYÜK", "KÜÇÜK", "Hata verir"],
       answer: "BÜYÜK",
       explanation:
@@ -490,7 +495,9 @@ export default function Home() {
                   <span className="eyebrow eyebrow--coral"><Lightbulb size={14} /> Sıra sende</span>
                   <h3>{activeChapter.quiz.question}</h3>
                 </header>
-                {activeChapter.quiz.question.includes("çıktı") || activeChapter.quiz.question.includes("ne olur") || activeChapter.quiz.question.includes("yazılır") ? null : null}
+                {activeChapter.quiz.code && (
+                  <pre className="course-code" aria-label="Soruda çözülenecek C kodu"><code>{activeChapter.quiz.code}</code></pre>
+                )}
                 <div className="course-options" role="group" aria-label="Cevap seçenekleri">
                   {activeChapter.quiz.options.map((option) => {
                     const isPicked = picked === option;
